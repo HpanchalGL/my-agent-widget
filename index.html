@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Looker Chat Widget</title>
+    <link rel="stylesheet" href="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.10/themes/chat-messenger-default.css">
+    <link rel="stylesheet" href="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.10/themes/chat-messenger-layout.css">
+    
+    <script defer src="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.10/chat-messenger.js"></script>
+    
+    <style>
+        body { margin: 0; padding: 0; background: transparent; }
+        /* This ensures the chat button stays visible in the Looker frame */
+        df-messenger {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <df-messenger
+      location="global"
+      project-id="utility-span-459719-r5"
+      agent-id="gads-agent_1771431719822"
+      language-code="en">
+    </df-messenger>
+</body>
+</html>

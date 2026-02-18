@@ -1,29 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Looker Chat Widget</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleo Chat Agent</title>
+    
     <link rel="stylesheet" href="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.10/themes/chat-messenger-default.css">
     <link rel="stylesheet" href="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.10/themes/chat-messenger-layout.css">
     
     <script defer src="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.10/chat-messenger.js"></script>
-    
+
     <style>
-        body { margin: 0; padding: 0; background: transparent; }
-        /* This ensures the chat button stays visible in the Looker frame */
-        df-messenger {
+        /* Force the widget to stay within the Looker Studio embed box */
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            height: 100vh; 
+            width: 100vw; 
+            overflow: hidden; 
+            background: transparent; 
+        }
+
+        /* Styling the chat-messenger component */
+        chat-messenger {
             position: fixed;
-            bottom: 0;
-            right: 0;
+            bottom: 10px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+        /* Adjusting the size of the chat container so it doesn't get cut off */
+        chat-messenger-container {
+            width: 350px;
+            height: 500px;
         }
     </style>
 </head>
 <body>
-    <df-messenger
-      location="global"
-      project-id="utility-span-459719-r5"
-      agent-id="gads-agent_1771431719822"
-      language-code="en">
-    </df-messenger>
+
+    <chat-messenger url-allowlist="*">
+      <chat-messenger-container
+        chat-title="Cleo"
+        chat-title-icon="https://gstatic.com/dialogflow-console/common/assets/ccai-favicons/conversational_agents.png"
+        enable-file-upload
+      >
+        <chat-reset-session-button
+          slot="titlebar-actions"
+          title-text="Start new chat"
+        ></chat-reset-session-button>
+      </chat-messenger-container>
+    </chat-messenger>
+
+    <script>
+        window.addEventListener("chat-messenger-loaded", () => {
+          chatSdk.registerContext(
+            chatSdk.prebuilts.ces.createContext({
+              deploymentName: "projects/utility-span-459719-r5/locations/us/apps/ef235375-1cb4-4a77-801b-71000f06fdf4/deployments/f7155280-519d-4e1a-a2ad-189b03eadb55",
+              tokenBroker: {
+                enableTokenBroker: true,
+                enableRecaptcha: false,
+              },
+            }),
+          );
+        });
+    </script>
+
 </body>
 </html>
